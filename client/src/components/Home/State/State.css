@@ -1,0 +1,43 @@
+.grid-list-state {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: 1fr;
+}
+
+.stats-card {
+  text-align: center;
+  padding: 25px;
+  border-radius: var(--radius-medium);
+  background-color: blanchedalmond;
+}
+
+.stats-text {
+  font-size: var(--title-large);
+  font-weight: 600;
+}
+
+.grid-list-state li:nth-child(1) .stats-card {
+  background-color: #ffe5e5;
+  color: #ff3333;
+}
+
+.grid-list-state li:nth-child(2) .stats-card {
+  background-color: #e5e5ff;
+  color: #3333ff;
+}
+
+.grid-list-state li:nth-child(3) .stats-card {
+  background-color: #e5ffe5;
+  color: #00b300;
+}
+
+.grid-list-state li:nth-child(4) .stats-card {
+  background-color: #ffffe5;
+  color: #e5e600;
+}
+
+@media (min-width: 460px) {
+  .grid-list-state {
+    grid-template-columns: 1fr 1fr;
+  }
+}

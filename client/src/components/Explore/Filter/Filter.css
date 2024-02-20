@@ -1,0 +1,129 @@
+body.active-filter {
+  overflow-y: hidden;
+}
+
+.filter-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 600px;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: gray;
+  margin-bottom: 4px;
+}
+
+.filter-selector {
+  position: relative;
+}
+
+.filter-selector select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid rgb(227, 227, 227);
+  border-radius: 6px;
+  appearance: none;
+}
+
+.filter-selector select:focus {
+  outline: 2px solid transparent;
+}
+
+.modal,
+.filter-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+.condition {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  margin-top: 30px;
+}
+
+.search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.search__input {
+  height: 4rem;
+  border: none;
+  border-radius: 1rem;
+  font-size: 1.4rem;
+  padding-left: 3.8rem;
+  margin-right: 1rem;
+  box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, -0.2rem -0.2rem 0.5rem #ffffff;
+  background: none;
+  font-family: inherit;
+  color: #9baacf;
+}
+.search__input::-moz-placeholder {
+  color: #bec8e4;
+}
+.search__input::placeholder {
+  color: #bec8e4;
+}
+.search__input:focus {
+  outline: none;
+  box-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7,
+    inset -0.2rem -0.2rem 0.5rem #ffffff;
+}
+
+.search__input:focus + .search__icon {
+  color: #6d5dfc;
+}
+.search__icon {
+  height: 2rem;
+  position: absolute;
+  font-size: 2rem;
+  padding: 0 1rem;
+  display: flex;
+  color: #9baacf;
+  transition: 0.3s ease;
+}
+
+.input-btn {
+  width: 5rem;
+  height: 4rem;
+  border-radius: 1rem;
+  box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, -0.2rem -0.2rem 0.5rem #ffffff;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.3s ease;
+  grid-column: 1/2;
+  grid-row: 5/6;
+  color: #9baacf;
+}
+
+.input-btn:hover {
+  color: #6d5dfc;
+}
+.input-btn:active {
+  box-shadow: inset 0.2rem 0.2rem 0.5rem #c8d0e7,
+    inset -0.2rem -0.2rem 0.5rem #ffffff;
+}
+

@@ -1,0 +1,40 @@
+.banner {
+  margin-top: 30px;
+}
+
+.offer-card {
+  border-radius: var(--radius-medium);
+  padding: 30px;
+  display: grid;
+  align-content: center;
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  transition: 0.3s;
+}
+
+.offer-card:where(:hover, :focus) {
+  scale: 1.02;
+  rotate: 1deg;
+}
+
+.offer-card .card-subtitle {
+  font-size: var();
+  font-weight: 600;
+  color: #c3c3c3;
+  font-size: var(--fs-title-small);
+}
+
+.offer-card .card-title {
+  color: black;
+  margin-block: 5px 24px;
+  font-weight: 600;
+  color: #ffffff;
+  font-size: var(--fs-title-large);
+}
+
+.grid-list-banner {
+  display: grid;
+  gap: 40px;
+  grid-template-columns: 1fr;
+}
