@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 const Profile = () => {
@@ -28,12 +29,10 @@ const Profile = () => {
   return (
     <div>
       <h2>Profile</h2>
-      {userData ? (
+      {userData && (
         <div>
           <p>Email: {userData.email}</p>
         </div>
-      ) : (
-        <p>Loading...</p>
       )}
     </div>
   );

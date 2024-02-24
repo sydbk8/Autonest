@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import "./Register.css";
+import { Link, useNavigate } from "react-router-dom";
+import "./Auth.css";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -82,7 +82,7 @@ const Register = () => {
           <button type="submit">Register</button>
         </form>
         <p>
-          New to Netflix? <a href="#">Sign up now</a>
+          Already have an account? <Link className="inline" to="/login">Sign in</Link>
         </p>
       </div>
     </div>

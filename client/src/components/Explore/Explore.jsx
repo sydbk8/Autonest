@@ -4,6 +4,8 @@ import Property from "./Property/Property";
 import Filter from "./Filter/Filter";
 import Pagination from "./Pagination/Pagination";
 import ExploreHero from "./ExploreHero/ExploreHero";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 
 const Explore = () => {
   const URL = "http://localhost:5000/api/cars";
@@ -117,6 +119,7 @@ const Explore = () => {
 
   return (
     <div>
+      <Header />
       <ExploreHero />
       <Filter
         makeFilter={makeFilter}
@@ -145,6 +148,7 @@ const Explore = () => {
             handlePageChange={handlePageChange}
             totalCards={data.length}
           /> */}
+          <Footer />
     </div>
   );
 };

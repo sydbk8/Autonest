@@ -259,7 +259,7 @@ section {
   align-items: center;
   gap: 12px;
   height: 48px;
-  padding-inline: 24px;
+  padding-inline: 20px;
   border-radius: var(--radius-small);
   max-width: max-content;
   transition: var(--transition-duration-quick) var(--transition-easing-quick);

@@ -1,41 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import "./Crud.css";
 
-const Update = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
-
+const Create = () => {
   const [carData, setCarData] = useState({
-    make: "",
-    model: "",
+    make: "BMW",
+    model: "S4",
     price: 0,
-    description: "",
+    description: "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
     miles: 0,
     fuelType: "Gasoline",
     transmission: "Automatic",
     image: null,
-    color: "",
-    year: 2022,
+    color: "red",
+    year: 2024,
     condition: "New",
     type: "Sedan",
   });
 
-  useEffect(() => {
-    const fetchCarDetails = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:5000/api/cars/${id}`
-        );
-
-        setCarData(response.data);
-      } catch (error) {
-        console.error("Error fetching car details:", error.message);
-      }
-    };
-
-    fetchCarDetails();
-  }, [id]);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -56,6 +40,7 @@ const Update = () => {
     e.preventDefault();
 
     try {
+      // Prepare form data
       const formData = new FormData();
       formData.append("make", carData.make);
       formData.append("model", carData.model);
@@ -65,13 +50,13 @@ const Update = () => {
       formData.append("fuelType", carData.fuelType);
       formData.append("transmission", carData.transmission);
       formData.append("image", carData.image);
-      formData.append("color", carData.color);
-      formData.append("year", carData.year);
-      formData.append("condition", carData.condition);
       formData.append("type", carData.type);
+      formData.append("condition", carData.condition);
+      formData.append("year", carData.year);
+      formData.append("color", carData.color);
 
-      const response = await axios.put(
-        `http://localhost:5000/api/cars/${id}`,
+      const response = await axios.post(
+        "http://localhost:5000/api/cars",
         formData,
         {
           headers: {
@@ -81,19 +66,37 @@ const Update = () => {
         }
       );
 
-      console.log("Car updated successfully:", response.data);
-      navigate("/"); // Redirect to home page after successful update
+      console.log("Car created successfully:", response.data);
+
+      // Reset form fields
+      setCarData({
+        make: "",
+        model: "",
+        price: "",
+        description: "",
+        miles: "",
+        fuelType: "Gasoline",
+        transmission: "Automatic",
+        image: null,
+        color: "",
+        year: 2024,
+        condition: "New",
+        type: "Sedan",
+      });
+
+      // Redirect to another route upon successful creation
+      navigate("/explore"); // Assuming "/" is the route for the home page
     } catch (error) {
-      console.error("Error updating car:", error.message);
+      console.error("Error creating car:", error.message);
     }
   };
 
   return (
-    <div className="mt-12">
-      <h2>Update</h2>
+    <div className="car-form">
+      <h2>Create</h2>
       <form onSubmit={handleSubmit} encType="multipart/form-data">
-        <label>
-          Make:
+        <div className="car-control">
+          <label>Make</label>
           <input
             type="text"
             name="make"
@@ -101,10 +104,9 @@ const Update = () => {
             onChange={handleChange}
             required
           />
-        </label>
-        <br />
-        <label>
-          Model:
+        </div>
+        <div className="car-control">
+          <label>Model</label>
           <input
             type="text"
             name="model"
@@ -112,10 +114,9 @@ const Update = () => {
             onChange={handleChange}
             required
           />
-        </label>
-        <br />
-        <label>
-          Price:
+        </div>
+        <div className="car-control">
+          <label>Price</label>
           <input
             type="number"
             name="price"
@@ -123,20 +124,19 @@ const Update = () => {
             onChange={handleChange}
             required
           />
-        </label>
-        <br />
-        <label>
-          Description:
-          <textarea
+        </div>
+        <div className="car-control">
+          <label>Description</label>
+          <input
+            type="text"
             name="description"
             value={carData.description}
             onChange={handleChange}
             required
           />
-        </label>
-        <br />
-        <label>
-          Miles:
+        </div>
+        <div className="car-control">
+          <label>Miles</label>
           <input
             type="number"
             name="miles"
@@ -144,26 +144,24 @@ const Update = () => {
             onChange={handleChange}
             required
           />
-        </label>
-        <br />
-        <label>
-          Fuel Type:
+        </div>
+        <div className="car-control">
+          <label>Fuel Type</label>
           <select
+            className="select"
             name="fuelType"
             value={carData.fuelType}
             onChange={handleChange}
             required
           >
             <option value="Gasoline">Gasoline</option>
-            <option value="Diesel">Diesel</option>
             <option value="Electric">Electric</option>
-            <option value="Hybrid">Hybrid</option>
           </select>
-        </label>
-        <br />
-        <label>
-          Transmission:
+        </div>
+        <div className="car-control">
+          <label>Transmission</label>
           <select
+            className="select"
             name="transmission"
             value={carData.transmission}
             onChange={handleChange}
@@ -172,20 +170,32 @@ const Update = () => {
             <option value="Automatic">Automatic</option>
             <option value="Manual">Manual</option>
           </select>
-        </label>
-        <br />
-        <label>
-          Image:
-          <input
-            type="file"
-            name="image"
-            onChange={handleImageChange}
-            required
-          />
-        </label>
-        <br />
-        <label>
-          Color:
+        </div>
+        <div className="car-control">
+          <label htmlFor="image">Image</label>
+          <div
+            className="image-upload-container"
+            onClick={() => document.getElementById("image").click()}
+          >
+            <input
+              type="file"
+              id="image"
+              name="image"
+              onChange={handleImageChange}
+              required
+              onClick={(e) => e.stopPropagation()}
+            />
+            {!carData.image && (
+              <label className="select-image">Select Image</label>
+            )}
+            {carData.image && (
+              <img src={URL.createObjectURL(carData.image)} alt="Selected" />
+            )}
+          </div>
+        </div>
+
+        <div className="car-control">
+          <label>Color</label>
           <input
             type="text"
             name="color"
@@ -193,10 +203,9 @@ const Update = () => {
             onChange={handleChange}
             required
           />
-        </label>
-        <br />
-        <label>
-          Year:
+        </div>
+        <div className="car-control">
+          <label>Year</label>
           <input
             type="number"
             name="year"
@@ -204,11 +213,11 @@ const Update = () => {
             onChange={handleChange}
             required
           />
-        </label>
-        <br />
-        <label>
-          Condition:
+        </div>
+        <div className="car-control">
+          <label>Condition</label>
           <select
+            className="select"
             name="condition"
             value={carData.condition}
             onChange={handleChange}
@@ -217,31 +226,31 @@ const Update = () => {
             <option value="New">New</option>
             <option value="Used">Used</option>
           </select>
-        </label>
-        <br />
-        <label>
-          Type:
+        </div>
+        <div className="car-control">
+          <label>Type</label>
           <select
+            className="select"
             name="type"
             value={carData.type}
             onChange={handleChange}
             required
           >
+            <option value="Convertible">Convertible</option>
+            <option value="Coupe">Coupe</option>
+            <option value="Hatchback">Hatchback</option>
+            <option value="Minivan">Minivan</option>
             <option value="Sedan">Sedan</option>
             <option value="SUV">SUV</option>
             <option value="Truck">Truck</option>
             <option value="Van">Van</option>
-            <option value="Convertible">Convertible</option>
-            <option value="Coupe">Coupe</option>
             <option value="Wagon">Wagon</option>
-            <option value="Other">Other</option>
           </select>
-        </label>
-        <br />
-        <button type="submit">Update</button>
+        </div>
+        <button type="submit">Create</button>
       </form>
     </div>
   );
 };
 
-export default Update;
+export default Create;

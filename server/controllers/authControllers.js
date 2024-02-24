@@ -39,12 +39,14 @@ const login = async (req, res) => {
     }
 
     const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, {
-      expiresIn: process.env.JWT_EXPIRES_IN,
+      expiresIn: process.env.JWT_EXPIRES_IN * 1000,
     });
+
+    const expiresIn = process.env.JWT_EXPIRES_IN;
 
     res.cookie('token', token, { httpOnly: true, maxAge: 1000 * parseInt(process.env.JWT_EXPIRES_IN), sameSite: 'strict' });
 
-    res.json({ message: "Login successful", token });
+    res.json({ message: "Login successful", token, expiresIn });
   } catch (error) {
     console.error("Error logging in:", error);
     res.status(500).json({ error: error.message });

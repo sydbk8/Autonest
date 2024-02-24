@@ -8,6 +8,7 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const isLoggedIn = !!localStorage.getItem("token"); // Check if user is logged in
 
   useEffect(() => {
     const handleScroll = () => {
@@ -65,9 +66,15 @@ const Header = () => {
             </li>
           </ul>
           <div>
-            <Link to="/login" className="btn label-medium">
-              Login
-            </Link>
+            {isLoggedIn ? (
+              <Link to="/profile" className="btn label-medium">
+                Profile
+              </Link>
+            ) : (
+              <Link to="/login" className="btn label-medium">
+                Login
+              </Link>
+            )}
           </div>
         </nav>
         <button

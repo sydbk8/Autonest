@@ -9,10 +9,7 @@ export const authenticateToken = async (req, res, next) => {
       return res.status(401).json({ error: "Unauthorized: No token provided" });
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET, (err, res) => {
-      console.log(err, 'error');
-      console.log(res, 'result');
-    });
+    const decoded = jwt.verify(token, process.env.JWT_SECRET)
 
     const user = await User.findByPk(decoded.id);
 

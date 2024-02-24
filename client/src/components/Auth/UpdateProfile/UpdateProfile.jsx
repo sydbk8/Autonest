@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const UpdateProfile = () => {
   const [userData, setUserData] = useState({
     email: "",
     // Add more fields as needed
   });
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch user data when the component mounts
